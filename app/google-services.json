@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "381384226271",
+    "firebase_url": "https://vanapp-37e22.firebaseio.com",
+    "project_id": "vanapp-37e22",
+    "storage_bucket": "vanapp-37e22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381384226271:android:f2f81ad7fa92099f",
+        "android_client_info": {
+          "package_name": "com.example.teste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381384226271-5bnes4umvcmarhbdurlgdj7edaenuo4e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.teste",
+            "certificate_hash": "c1fef30d2e483096c7afacca40aec9f308bc4e21"
+          }
+        },
+        {
+          "client_id": "381384226271-8g3qe9rmrvect26rainbhcr7fuiglf85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8ID5vN5zVxM1Q5XCuFZyFiXFd7HgC2hs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381384226271-8g3qe9rmrvect26rainbhcr7fuiglf85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
