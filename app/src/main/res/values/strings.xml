@@ -2,6 +2,13 @@
     <string name="app_name">Teste</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="phone">Celular</string>
+    <string name="nome">Nome</string>
+    <string name="botao_entrar">Entrar</string>
+    <string name="botao_cad">Cadastrar</string>
+    <string name="senha_novamente">Insira a senha novamente</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
