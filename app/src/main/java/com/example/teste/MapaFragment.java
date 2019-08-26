@@ -9,15 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseReference;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MapaFragment extends Fragment {
 
+    DatabaseReference dataBaseReference;
 
-    public MapaFragment() {
-        // Required empty public constructor
+    public MapaFragment(DatabaseReference dataBaseReference) {
+        this.dataBaseReference = dataBaseReference;
     }
 
 
