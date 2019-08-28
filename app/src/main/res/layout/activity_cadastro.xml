@@ -68,11 +68,23 @@
         android:id="@+id/editText5"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_carac"
         android:ems="10"
         android:hint="@string/senha"
         android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/editText3"
+        app:layout_constraintStart_toStartOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/editText9" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/cpf"
+        android:background="@drawable/rounded_carac"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/editText3"
         app:layout_constraintStart_toStartOf="@+id/editText3"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
@@ -81,9 +93,9 @@
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/botao_cad"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_but"
+        android:text="@string/botao_cad"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="@+id/editText4"
         app:layout_constraintStart_toStartOf="@+id/editText4"
@@ -99,7 +111,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/rounded_but2"
-        android:text="Foto"
+        android:text="@string/Foto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -114,4 +126,30 @@
         app:layout_constraintStart_toStartOf="@+id/buttonFoto"
         app:layout_constraintTop_toTopOf="@+id/buttonFoto"
         app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editText9"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/cep"
+        android:inputType="textPersonName"
+        android:background="@drawable/rounded_carac"
+        app:layout_constraintEnd_toEndOf="@+id/editText10"
+        app:layout_constraintStart_toStartOf="@+id/editText10"
+        app:layout_constraintTop_toBottomOf="@+id/editText10" />
+
+    <EditText
+        android:id="@+id/editText10"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_carac"
+        android:ems="10"
+        android:hint="@string/data_nasc"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="@+id/editText7"
+        app:layout_constraintStart_toStartOf="@+id/editText7"
+        app:layout_constraintTop_toBottomOf="@+id/editText7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,6 +37,9 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText editPhone;
     private EditText editSenha;
     private EditText editSenhaNov;
+    private EditText editCep;
+    private EditText editCpf;
+    private EditText editData_nasc;
     private Button button_Cad;
     private Button button_Foto;
     private Uri uri;
@@ -56,6 +59,10 @@ public class CadastroActivity extends AppCompatActivity {
         editSenhaNov = findViewById(R.id.editText5);
         button_Cad = findViewById(R.id.button);
         imgFoto = findViewById(R.id.imageFoto);
+        editCpf = findViewById(R.id.editText7);
+        editCep = findViewById(R.id.editText9);
+        editData_nasc = findViewById(R.id.editText10);
+
 
         button_Foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,8 +116,12 @@ public class CadastroActivity extends AppCompatActivity {
         String senhanov = editSenhaNov.getText().toString();
         String phone = editPhone.getText().toString();
         String nome = editNome.getText().toString();
+        String data_nasc = editData_nasc.getText().toString();
+        String cpf = editCpf.getText().toString();
+        String cep = editCep.getText().toString();
         
-        if(email.isEmpty() || email == null || senha == null || senha.isEmpty() || nome == null || nome.isEmpty() || phone == null || phone.isEmpty()){
+        if(email.isEmpty() || email == null || senha == null || senha.isEmpty() || nome == null || nome.isEmpty() || phone == null || phone.isEmpty()
+                || data_nasc == null || data_nasc.isEmpty() || cpf == null || cpf.isEmpty() || cep == null || cep.isEmpty() ){
             Toast.makeText(this, "Os campos devem ser prenchidos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -139,7 +150,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void saveUserInFirebase() {
         String filename = UUID.randomUUID().toString();
-        final StorageReference ref =  FirebaseStorage.getInstance().getReference("/images/" + filename);
+        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
         ref.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -147,9 +158,20 @@ public class CadastroActivity extends AppCompatActivity {
                         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Log.i("", uri.toString());
+                                Log.i("Sucesso", uri.toString());
+
+                                String uuid = firebaseAuth.getInstance().getUuid();
+
+                                //new User();
                             }
                         });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Falha", e.getMessage());
+                        e.printStackTrace();
                     }
                 });
     }
