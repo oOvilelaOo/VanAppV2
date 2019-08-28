@@ -1,20 +1,34 @@
 package com.example.teste;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -24,6 +38,9 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText editSenha;
     private EditText editSenhaNov;
     private Button button_Cad;
+    private Button button_Foto;
+    private Uri uri;
+    private ImageView imgFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +48,21 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         editEmail = findViewById(R.id.editText);
+
         editNome = findViewById(R.id.editText2);
+        button_Foto = findViewById(R.id.buttonFoto);
         editPhone = findViewById(R.id.editText3);
         editSenha = findViewById(R.id.editText4);
         editSenhaNov = findViewById(R.id.editText5);
         button_Cad = findViewById(R.id.button);
+        imgFoto = findViewById(R.id.imageFoto);
+
+        button_Foto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectFoto();
+            }
+        });
 
         button_Cad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +70,36 @@ public class CadastroActivity extends AppCompatActivity {
                 createUser();
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0){
+            uri = data.getData();
+
+            Bitmap bitmap = null;
+
+            try{
+                MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                imgFoto.setImageDrawable(new BitmapDrawable(bitmap));
+                button_Foto.setAlpha(0);
+            }
+            catch(IOException e){
+
+            }
+
+
+        }
+    }
+
+    private void selectFoto(){
+
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 0);
+
+
     }
 
     private void createUser(){
@@ -66,13 +123,33 @@ public class CadastroActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.i("Válido", task.getResult().getUser().getUid());
+                        if(task.isSuccessful()){
+                            saveUserInFirebase();
+
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.i("Inválido", e.getMessage());
+                    }
+                });
+    }
+
+    private void saveUserInFirebase() {
+        String filename = UUID.randomUUID().toString();
+        final StorageReference ref =  FirebaseStorage.getInstance().getReference("/images/" + filename);
+        ref.putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Log.i("", uri.toString());
+                            }
+                        });
                     }
                 });
     }
