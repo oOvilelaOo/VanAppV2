@@ -75,6 +75,4 @@ public class MainActivity extends AppCompatActivity {
         dataBaseReference = firebaseDatabase.getReference();
     }
 
-
-
 }
