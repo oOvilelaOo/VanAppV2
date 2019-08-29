@@ -70,7 +70,7 @@ public class TransportadorFragment extends Fragment {
         dataBaseReference.child("Transportador").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            /*    listaTransportadores.clear();
+                listaTransportadores.clear();
                 for(DataSnapshot objSnapshot:dataSnapshot.getChildren()){
 
                     TransportadorVO transportadorVO = objSnapshot.getValue(TransportadorVO.class);
@@ -78,7 +78,7 @@ public class TransportadorFragment extends Fragment {
 
                 }
                 adapterTransportadorVO = new ArrayAdapter<TransportadorVO>(getContext(),android.R.layout.simple_list_item_1,listaTransportadores);
-                listView.setAdapter(adapterTransportadorVO);*/
+                listView.setAdapter(adapterTransportadorVO);
             }
 
             @Override
