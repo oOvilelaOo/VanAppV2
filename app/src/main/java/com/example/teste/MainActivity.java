@@ -3,7 +3,6 @@ package com.example.teste;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.teste.ui.main.VOs.UsuarioVO;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;

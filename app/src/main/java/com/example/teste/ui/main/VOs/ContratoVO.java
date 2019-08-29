@@ -1,6 +1,6 @@
 package com.example.teste.ui.main.VOs;
 
-public class Contrato {
+public class ContratoVO {
 
     private String cnh;
     private String cpf;
@@ -10,7 +10,7 @@ public class Contrato {
     private String hrSaida;
     private String nomeAluno;
 
-    public Contrato(String cnh, String cpf, String cod, String codInepMec, String hrEntrada, String hrSaida, String nomeAluno) {
+    public ContratoVO(String cnh, String cpf, String cod, String codInepMec, String hrEntrada, String hrSaida, String nomeAluno) {
         this.cnh = cnh;
         this.cpf = cpf;
         this.cod = cod;
