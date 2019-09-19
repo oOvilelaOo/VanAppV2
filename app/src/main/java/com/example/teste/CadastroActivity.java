@@ -160,7 +160,7 @@ public class CadastroActivity extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 Log.i("Sucesso", uri.toString());
 
-                                String uuid = firebaseAuth.getInstance().getUuid();
+                                String uuid = FirebaseAuth.getInstance().getUid();
 
                                 //new User();
                             }

@@ -1,14 +1,14 @@
 package com.example.teste;
 
 import android.os.Bundle;
-import android.view.View;
 
+import com.example.teste.Desenvolvimento_Responsavel.PageAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +22,8 @@ public class MainActivity extends AppCompatActivity {
     TabItem tabChat;
     TabItem tabTransportador;
     TabItem tabMapaOnline;
-
+    FirebaseFirestore firebaseFirestore;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference dataBaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         inicializarFireBase();
 
-        pageAdapter = new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount(), dataBaseReference);
+        pageAdapter = new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount(), firebaseFirestore);
         viewPager.setAdapter(pageAdapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -71,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(MainActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseDatabase.setPersistenceEnabled(true);
-        dataBaseReference = firebaseDatabase.getReference();
+        firebaseFirestore = firebaseFirestore.getInstance();
+
     }
 
 }

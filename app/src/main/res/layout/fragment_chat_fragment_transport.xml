@@ -3,16 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Desenvolvimento_Responsavel.TransportadorFragment">
+    tools:context=".Desenvolvimento_Transportador.ChatFragmentTransport">
 
-    <LinearLayout
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:text="@string/hello_blank_fragment" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaRecycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.example.teste.ui.main.VOs;
+package com.example.teste.VOs;
 
 public class VanEscolarVO {
 

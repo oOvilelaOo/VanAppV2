@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/fotoTransp"
-        android:layout_width="75dp"
+
         android:layout_height="75dp"
-        android:contentDescription=""
-        />
+        android:layout_width="75dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,12 +22,17 @@
             android:padding="5dp"/>
 
         <TextView
-            android:id="@+id/infoTransp"
+            android:id="@+id/cnhTransp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="@android:color/black"
             android:padding="5dp"/>
+
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="@android:color/black"/>
 
     </LinearLayout>
 
