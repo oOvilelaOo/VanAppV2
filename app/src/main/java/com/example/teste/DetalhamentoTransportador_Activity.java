@@ -20,7 +20,7 @@ public class DetalhamentoTransportador_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhamento_transportador);
 
-        nomeEmp = findViewById(R.id.nomeEmp);
+        nomeEmp = findViewById(R.id.nomeEmpresa);
 
         Bundle bundle = getIntent().getExtras();
 
