@@ -3,37 +3,89 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-
-        android:layout_height="75dp"
-        android:layout_width="75dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nomeTransp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:padding="5dp"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/cnhTransp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@android:color/black"
-            android:padding="5dp"/>
+             <ImageView android:id="@+id/imagemTransp"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nomeTransp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Tia Fabi"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/nomeEmpresa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Piza Transportes"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right">
+                <TextView
+                    android:id="@+id/estrelas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estrelas"
+                    android:layout_gravity="bottom"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/vagas"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="vagas"
+                    android:textSize="25dp"
+                    android:layout_gravity="right"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right">
+                    <TextView
+                    android:id="@+id/telefone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="telefone"
+                    android:layout_gravity="bottom"
+                    />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <View
-            android:layout_height="2dp"
-            android:layout_width="match_parent"
-            android:background="@android:color/black"/>
+            android:id="@+id/myview"
+            android:background="#000000"
+            android:layout_height="1dp"
+            android:layout_width="match_parent" />
 
     </LinearLayout>
-
 </LinearLayout>

@@ -14,6 +14,10 @@ public class TelefoneVO {
         this.telefoneResidencial = telefoneResidencial;
     }
 
+    public TelefoneVO() {
+
+    }
+
     public String getCelular() {
         return celular;
     }

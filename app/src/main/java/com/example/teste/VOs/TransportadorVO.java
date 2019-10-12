@@ -4,7 +4,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.local.ReferenceSet;
 import com.google.firebase.firestore.model.value.ReferenceValue;
 
-public class TransportadorVO {
+import java.io.Serializable;
+
+public class TransportadorVO implements Serializable {
 
     private DocumentReference referenceUsuario;
     private String nomeEmpresa;
