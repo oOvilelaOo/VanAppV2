@@ -68,7 +68,7 @@ public class TransportadorFragment extends Fragment {
 
         FirestoreRecyclerOptions<TransportadorVO> options = new FirestoreRecyclerOptions.Builder<TransportadorVO>().setQuery(query,TransportadorVO.class).build();
 
-        adapter = new List_row_transportadores_adapter(options);
+        adapter = new List_row_transportadores_adapter(options,mFirestore);
         adapter.notifyDataSetChanged();
 
         recyclerView.setAdapter(adapter);

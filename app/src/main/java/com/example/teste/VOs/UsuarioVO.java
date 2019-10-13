@@ -1,17 +1,19 @@
 package com.example.teste.VOs;
 
-public class UsuarioVO {
+import java.io.Serializable;
+
+public class UsuarioVO implements Serializable {
 
     private String email;
     private String nome;
-    private String usuario;
     private String senha;
+    private String usuario;
 
     public UsuarioVO() {
 
     }
 
-    public UsuarioVO(String email, String nome, String usuario, String senha) {
+    public UsuarioVO(String email, String nome, String senha, String usuario) {
         this.email = email;
         this.nome = nome;
         this.usuario = usuario;

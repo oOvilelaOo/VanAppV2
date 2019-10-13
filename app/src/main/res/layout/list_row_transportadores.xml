@@ -26,7 +26,6 @@
                     android:id="@+id/nomeTransp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Tia Fabi"
                     android:textSize="20dp"
                     android:textStyle="bold"/>
 
@@ -40,7 +39,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="right">
+                    android:layout_gravity="left">
                 <TextView
                     android:id="@+id/estrelas"
                     android:layout_width="wrap_content"
@@ -73,7 +72,6 @@
                     android:id="@+id/telefone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="telefone"
                     android:layout_gravity="bottom"
                     />
                 </LinearLayout>

@@ -23,7 +23,7 @@
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
             android:text="VanApp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/address"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
 
         <com.google.android.material.tabs.TabLayout
@@ -31,8 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            app:tabSelectedTextColor="@color/colorPrimaryDark"
-            app:tabTextColor="@color/colorPrimary">
+            app:tabSelectedTextColor="@color/grey"
+            app:tabTextColor="@color/address">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tabChat"

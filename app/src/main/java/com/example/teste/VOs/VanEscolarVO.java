@@ -1,18 +1,21 @@
 package com.example.teste.VOs;
 
-public class VanEscolarVO {
+import java.io.Serializable;
+
+public class VanEscolarVO implements Serializable {
 
     private String DataUltRevis;
-    private String id;
     private String ano;
     private String cnh;
     private String codModelo;
-    private String numAcentos;
-    private String vagas;
+    private int numAcentos;
+    private int vagas;
 
-    public VanEscolarVO(String dataUltRevis, String id, String ano, String cnh, String codModelo, String numAcentos, String vagas) {
+    public VanEscolarVO() {
+    }
+
+    public VanEscolarVO(String dataUltRevis, String ano, String cnh, String codModelo, int numAcentos, int vagas) {
         DataUltRevis = dataUltRevis;
-        this.id = id;
         this.ano = ano;
         this.cnh = cnh;
         this.codModelo = codModelo;
@@ -26,14 +29,6 @@ public class VanEscolarVO {
 
     public void setDataUltRevis(String dataUltRevis) {
         DataUltRevis = dataUltRevis;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getAno() {
@@ -60,19 +55,19 @@ public class VanEscolarVO {
         this.codModelo = codModelo;
     }
 
-    public String getNumAcentos() {
+    public int getNumAcentos() {
         return numAcentos;
     }
 
-    public void setNumAcentos(String numAcentos) {
+    public void setNumAcentos(int numAcentos) {
         this.numAcentos = numAcentos;
     }
 
-    public String getVagas() {
+    public int getVagas() {
         return vagas;
     }
 
-    public void setVagas(String vagas) {
+    public void setVagas(int vagas) {
         this.vagas = vagas;
     }
 }

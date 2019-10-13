@@ -1,21 +1,18 @@
 package com.example.teste.VOs;
 
-public class TelefoneVO {
+import java.io.Serializable;
+
+public class TelefoneVO implements Serializable {
 
     private String celular;
-    private String codTel;
-    private String codUsuario;
     private String telefoneResidencial;
 
-    public TelefoneVO(String celular, String codTel, String codUsuario, String telefoneResidencial) {
-        this.celular = celular;
-        this.codTel = codTel;
-        this.codUsuario = codUsuario;
-        this.telefoneResidencial = telefoneResidencial;
+    public TelefoneVO() {
     }
 
-    public TelefoneVO() {
-
+    public TelefoneVO(String celular, String telefoneResidencial) {
+        this.celular = celular;
+        this.telefoneResidencial = telefoneResidencial;
     }
 
     public String getCelular() {
@@ -24,22 +21,6 @@ public class TelefoneVO {
 
     public void setCelular(String celular) {
         this.celular = celular;
-    }
-
-    public String getCodTel() {
-        return codTel;
-    }
-
-    public void setCodTel(String codTel) {
-        this.codTel = codTel;
-    }
-
-    public String getCodUsuario() {
-        return codUsuario;
-    }
-
-    public void setCodUsuario(String codUsuario) {
-        this.codUsuario = codUsuario;
     }
 
     public String getTelefoneResidencial() {
