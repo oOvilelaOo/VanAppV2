@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Teste</string>
+    <string name="app_name">Van App</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="email">E-mail</string>
@@ -13,6 +13,16 @@
     <string name="cpf">CPF</string>
     <string name="cep">CEP</string>
     <string name="Foto">FOTO</string>
+    <string name="sayhello">Digite aqui...</string>
+    <string name="resp_alunos">Responsáveis ou Alunos</string>
+    <string name="transp">Transportadores</string>
+    <string name="logout">Logout</string>
+    <string name="cnh">CNH</string>
+    <string name="nome_empresa">Nome da Empresa</string>
+    <string name="home">Voltar</string>
+    <string name="emailpassword_status_fmt">Email do Usuário: %1$s (Verificado: %2$b)</string>
+    <string name="signed_out">Saiu</string>
+    <string name="auth_failed">Autenticação falhou</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

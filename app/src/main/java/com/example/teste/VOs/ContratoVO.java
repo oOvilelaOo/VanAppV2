@@ -1,6 +1,8 @@
 package com.example.teste.VOs;
 
-public class ContratoVO {
+import java.io.Serializable;
+
+public class ContratoVO implements Serializable {
 
     private String cnh;
     private String cpf;
@@ -9,6 +11,9 @@ public class ContratoVO {
     private String hrEntrada;
     private String hrSaida;
     private String nomeAluno;
+
+    public ContratoVO() {
+    }
 
     public ContratoVO(String cnh, String cpf, String cod, String codInepMec, String hrEntrada, String hrSaida, String nomeAluno) {
         this.cnh = cnh;

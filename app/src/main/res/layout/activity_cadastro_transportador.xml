@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".CadastroTransportadorActivity"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp"
-    android:id="@+id/scrollView9"
-    tools:context=".CadastroActivity">
+    tools:layout_editor_absoluteY="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -51,12 +51,28 @@
             style="(00) 00000-0000"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_carac"
+            android:ems="10"
+            android:hint="@string/cnh"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="@+id/editText6"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/editText6"
+            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+        <EditText
+            android:id="@+id/editText6"
+            style="(00) 00000-0000"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_carac"
             android:ems="10"
-            android:hint="@string/phone"
+            android:hint="@string/nome_empresa"
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="@+id/editText2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/editText2"
             app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
@@ -78,32 +94,20 @@
             android:id="@+id/editText5"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_carac"
             android:ems="10"
             android:hint="@string/senha"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/editText3"
-            app:layout_constraintStart_toStartOf="@+id/editText3"
+            app:layout_constraintEnd_toEndOf="@+id/editText9"
+            app:layout_constraintStart_toStartOf="@+id/editText9"
             app:layout_constraintTop_toBottomOf="@+id/editText9" />
-
-        <EditText
-            android:id="@+id/editText7"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/cpf"
-            android:background="@drawable/rounded_carac"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="@+id/editText3"
-            app:layout_constraintStart_toStartOf="@+id/editText3"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rounded_but"
             android:text="@string/botao_cad"
             android:textSize="15dp"
@@ -141,40 +145,24 @@
             android:id="@+id/editText9"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_carac"
             android:ems="10"
-            android:hint="@string/cep"
+            android:hint="@string/phone"
             android:inputType="textPersonName"
-            android:background="@drawable/rounded_carac"
-            app:layout_constraintEnd_toEndOf="@+id/editText10"
-            app:layout_constraintStart_toStartOf="@+id/editText10"
-            app:layout_constraintTop_toBottomOf="@+id/editText10" />
-
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_carac"
-            android:ems="10"
-            android:hint="@string/data_nasc"
-            android:inputType="date"
-            app:layout_constraintEnd_toEndOf="@+id/editText7"
-            app:layout_constraintStart_toStartOf="@+id/editText7"
-            app:layout_constraintTop_toBottomOf="@+id/editText7" />
+            app:layout_constraintEnd_toEndOf="@+id/editText3"
+            app:layout_constraintStart_toStartOf="@+id/editText3"
+            app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/button2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageFoto" />
+            app:layout_constraintEnd_toEndOf="@+id/imageFoto"
+            app:layout_constraintStart_toStartOf="@+id/imageFoto"
+            app:layout_constraintTop_toBottomOf="@+id/imageFoto" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

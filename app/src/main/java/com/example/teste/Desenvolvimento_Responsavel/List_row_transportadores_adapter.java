@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teste.DetalhamentoTransportador_Activity;
 import com.example.teste.R;
+import com.example.teste.VOs.EscolaVO;
+import com.example.teste.VOs.MarcaVO;
+import com.example.teste.VOs.ModeloVO;
 import com.example.teste.VOs.TelefoneVO;
 import com.example.teste.VOs.TransportadorVO;
 import com.example.teste.VOs.UsuarioVO;
@@ -25,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<TransportadorVO, List_row_transportadores_adapter.ViewHolder> {
 
@@ -32,6 +37,8 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
     ArrayList<UsuarioVO> us = new ArrayList<UsuarioVO>();
     ArrayList<TelefoneVO> tl = new ArrayList<TelefoneVO>();
     ArrayList<VanEscolarVO> ve = new ArrayList<VanEscolarVO>();
+    ArrayList<ModeloVO> md = new ArrayList<ModeloVO>();
+    ArrayList<MarcaVO> mr = new ArrayList<MarcaVO>();
 
     FirebaseFirestore mFirestore;
 
@@ -67,11 +74,7 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
 
             viewHolder.nomeEmpresa.setText(transportadorVO.getNomeEmpresa());
 
-            carregaUsuario(transportadorVO,viewHolder,i);
-
-            carregaVan(transportadorVO,viewHolder,i);
-
-            carregaTelefone(transportadorVO,viewHolder,i);
+            carregaDados(transportadorVO,viewHolder,i);
 
     }
 
@@ -103,12 +106,18 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
 
                         VanEscolarVO van = ve.get(getLayoutPosition());
 
+                        ModeloVO modelo = md.get(getLayoutPosition());
+
+                        MarcaVO marca = mr.get(getLayoutPosition());
+
                         Intent i = new Intent(context,DetalhamentoTransportador_Activity.class);
 
                         i.putExtra("transportador",transportador);
                         i.putExtra("usuario",usuario);
                         i.putExtra("telefone",telefone);
                         i.putExtra("van",van);
+                        i.putExtra("modelo",modelo);
+                        i.putExtra("marca",marca);
 
                     ((AppCompatActivity)context).startActivityForResult(i,0);
 
@@ -117,9 +126,13 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
 
         }
     }
-    public void carregaUsuario(TransportadorVO transportadorVO, @NonNull final ViewHolder viewHolder,int i){
+    public void carregaDados(TransportadorVO transportadorVO, @NonNull final ViewHolder viewHolder,int i){
 
-        DocumentReference docUser = mFirestore.collection("Usuarios").document(tp.get(i).getReferenceUsuario());
+        DocumentReference docUser = mFirestore.collection("Usuarios").document(transportadorVO.getReferenceUsuario());
+
+        DocumentReference docTel = mFirestore.collection("Telefone").document(transportadorVO.getReferenceTel());
+
+        DocumentReference docVan = mFirestore.collection("VanEscolar").document(transportadorVO.getVan());
 
         docUser.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
@@ -134,11 +147,10 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
 
             }
         });
-    }
 
-    public void carregaTelefone(TransportadorVO transportadorVO,@NonNull final ViewHolder viewHolder,int i){
+        /*String id = docTel.getId();
 
-        DocumentReference docTel = mFirestore.collection("Telefone").document(tp.get(i).getReferenceTel());
+        System.out.println(id);*/
 
         docTel.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
@@ -152,11 +164,6 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
                 viewHolder.telefone.setText(tel.getCelular());
             }
         });
-    }
-
-    public void carregaVan(TransportadorVO transportadorVO, @NonNull final ViewHolder viewHolder,int i){
-
-        DocumentReference docVan = mFirestore.collection("VanEscolar").document(tp.get(i).getVan());
 
         docVan.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 
@@ -168,6 +175,44 @@ public class List_row_transportadores_adapter extends FirestoreRecyclerAdapter<T
                 ve.add(van);
 
                 viewHolder.vagas.setText(String.valueOf(van.getVagas()));
+
+                carregaModelo(van);
+
+            }
+        });
+    }
+
+    public void carregaModelo(VanEscolarVO vanVO){
+
+        DocumentReference docVan = mFirestore.collection("Modelo").document(vanVO.getCodModelo());
+
+        docVan.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                ModeloVO modelo = documentSnapshot.toObject(ModeloVO.class);
+
+                md.add(modelo);
+
+                carregaMarca(modelo);
+
+            }
+        });
+    }
+
+    public void carregaMarca(ModeloVO modeloVO){
+
+        DocumentReference docVan = mFirestore.collection("Marca").document(modeloVO.getCodMarca());
+
+        docVan.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                MarcaVO marca = documentSnapshot.toObject(MarcaVO.class);
+
+                mr.add(marca);
 
             }
         });

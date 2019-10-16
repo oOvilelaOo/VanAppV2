@@ -1,6 +1,8 @@
 package com.example.teste.VOs;
 
-public class Resp_alunosVO {
+import java.io.Serializable;
+
+public class Resp_alunosVO implements Serializable {
 
     private String cpf;
     private String dataNasc;
@@ -8,6 +10,9 @@ public class Resp_alunosVO {
     private String numCasa;
     private String complemento;
     private String chaveUsuario;
+
+    public Resp_alunosVO() {
+    }
 
     public Resp_alunosVO(String cpf, String dataNasc, String cep, String numCasa, String complemento, String chaveUsuario) {
         this.cpf = cpf;

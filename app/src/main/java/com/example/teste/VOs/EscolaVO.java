@@ -1,6 +1,8 @@
 package com.example.teste.VOs;
 
-public class EscolaVO {
+import java.io.Serializable;
+
+public class EscolaVO implements Serializable {
 
     private String codInepMec;
     private String nome;

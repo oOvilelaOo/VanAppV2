@@ -1,17 +1,18 @@
 package com.example.teste.VOs;
 
-public class MarcaVO {
+import java.io.Serializable;
+
+public class MarcaVO implements Serializable {
 
     private String codMarca;
-    private String marca;
-
-    public MarcaVO(String codMarca, String marca) {
-        this.codMarca = codMarca;
-        this.marca = marca;
-    }
+    private String nome;
 
     public MarcaVO() {
+    }
 
+    public MarcaVO(String codMarca, String nome) {
+        this.codMarca = codMarca;
+        this.nome = nome;
     }
 
     public String getCodMarca() {
@@ -22,11 +23,11 @@ public class MarcaVO {
         this.codMarca = codMarca;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getNome() {
+        return nome;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

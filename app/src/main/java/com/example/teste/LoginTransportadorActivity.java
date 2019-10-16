@@ -19,26 +19,28 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginTransportadorActivity extends AppCompatActivity {
 
     private EditText Edit_Email;
     private EditText Edit_Pass;
     private Button Button;
-    private TextView textView;
-    private FirebaseAuth mAuth;
+    private TextView sem_Conta;
+    private TextView Indicador;
     private TextView lib;
+    private FirebaseAuth mAuth;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_transportador);
 
         Edit_Email = findViewById(R.id.edit_email);
         Edit_Pass = findViewById(R.id.edit_pass);
         Button = findViewById(R.id.button);
-        textView = findViewById(R.id.textView);
+        sem_Conta = findViewById(R.id.textView);
+        lib = findViewById(R.id.textView6);
         mAuth = FirebaseAuth.getInstance();
-        lib = findViewById(R.id.textView4);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,22 +52,22 @@ public class LoginActivity extends AppCompatActivity {
                 String senha = Edit_Pass.getText().toString();
 
                 if (email.isEmpty() || email == null || senha == null || senha.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Os campos devem ser prenchidos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginTransportadorActivity.this, "Os campos devem ser prenchidos", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else {
+                else{
                     signIn(email, senha);
                 }
             }
 
         });
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        sem_Conta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
+                Intent intent = new Intent(LoginTransportadorActivity.this, CadastroTransportadorActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                LoginActivity.this.startActivity(intent);
+                LoginTransportadorActivity.this.startActivity(intent);
             }
         });
     }
@@ -83,17 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Logando", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent (LoginTransportadorActivity.this, MainActivity.class);
 
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
-
-                            LoginActivity.this.startActivity(intent);
+                            LoginTransportadorActivity.this.startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Logando", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Autenticação falhou.",
+                            Toast.makeText(LoginTransportadorActivity.this, "Autenticação falhou.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -116,11 +116,11 @@ public class LoginActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == android.R.id.home){
-            Intent intent = new Intent (LoginActivity.this, AberturaActivity.class);
+            Intent intent = new Intent (LoginTransportadorActivity.this, AberturaActivity.class);
 
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            LoginActivity.this.startActivity(intent);
+            LoginTransportadorActivity.this.startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

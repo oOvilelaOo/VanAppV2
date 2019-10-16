@@ -1,33 +1,31 @@
 package com.example.teste;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+//import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -44,10 +42,15 @@ public class CadastroActivity extends AppCompatActivity {
     private Button button_Foto;
     private Uri uri;
     private ImageView imgFoto;
+    private FirebaseAuth mAuth;
+    private TextView lib;
+    public FirebaseFirestore db;
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         setContentView(R.layout.activity_cadastro);
 
         editEmail = findViewById(R.id.editText);
@@ -57,12 +60,24 @@ public class CadastroActivity extends AppCompatActivity {
         editPhone = findViewById(R.id.editText3);
         editSenha = findViewById(R.id.editText4);
         editSenhaNov = findViewById(R.id.editText5);
-        button_Cad = findViewById(R.id.button);
+        button_Cad = findViewById(R.id.button2);
         imgFoto = findViewById(R.id.imageFoto);
         editCpf = findViewById(R.id.editText7);
         editCep = findViewById(R.id.editText9);
         editData_nasc = findViewById(R.id.editText10);
+        lib = findViewById(R.id.textView5);
 
+        this.db = FirebaseFirestore.getInstance();
+
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         button_Foto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,33 +94,45 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+    //Carrega o usuário atual do serviço
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+    }
+
+    //Pega a foto e manda para o servidor
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 0){
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+
             uri = data.getData();
 
-            Bitmap bitmap = null;
-
-            try{
-                MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                imgFoto.setImageDrawable(new BitmapDrawable(bitmap));
-                button_Foto.setAlpha(0);
-            }
-            catch(IOException e){
-
-            }
-
-
+            //Picasso.get().load(uri).into(imgFoto);
         }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+
+        if(id == android.R.id.home){
+            Intent intent = new Intent (CadastroActivity.this, LoginActivity.class);
+
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            CadastroActivity.this.startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void selectFoto(){
 
-        Intent intent = new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent();
         intent.setType("image/*");
-        startActivityForResult(intent, 0);
-
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
 
     }
 
@@ -119,9 +146,9 @@ public class CadastroActivity extends AppCompatActivity {
         String data_nasc = editData_nasc.getText().toString();
         String cpf = editCpf.getText().toString();
         String cep = editCep.getText().toString();
-        
-        if(email.isEmpty() || email == null || senha == null || senha.isEmpty() || nome == null || nome.isEmpty() || phone == null || phone.isEmpty()
-                || data_nasc == null || data_nasc.isEmpty() || cpf == null || cpf.isEmpty() || cep == null || cep.isEmpty() ){
+
+
+        if(email.isEmpty() || email == null || senha == null || senha.isEmpty() || nome == null || nome.isEmpty() || phone == null || phone.isEmpty()|| data_nasc == null || data_nasc.isEmpty() || cpf == null || cpf.isEmpty() || cep == null || cep.isEmpty() ){
             Toast.makeText(this, "Os campos devem ser prenchidos", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -129,49 +156,42 @@ public class CadastroActivity extends AppCompatActivity {
             Toast.makeText(this, "As senhas devem ser iguais", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,senha)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            saveUserInFirebase();
-
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.i("Inválido", e.getMessage());
-                    }
-                });
+        else {
+            mAuth.createUserWithEmailAndPassword(email, senha);
+            saveUserInFirebase(email, senha, nome, phone, data_nasc, cpf, cep);
+        }
     }
 
-    private void saveUserInFirebase() {
-        String filename = UUID.randomUUID().toString();
-        final StorageReference ref = FirebaseStorage.getInstance().getReference("/images/" + filename);
-        ref.putFile(uri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+    private void saveUserInFirebase(String email, String senha, String nome, String phone, String data_nasc, String cpf, String cep) {
+
+        String id= UUID.randomUUID().toString();
+        FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("Email", email);
+        user.put("Senha", senha);
+        user.put("Celular", phone);
+        user.put("Nome", nome);
+        user.put("Data_nasc", data_nasc);
+        user.put("cpf", cpf);
+        user.put("cep", cep);
+        user.put("ID", id);
+        user.put("UserCode", fuser);
+
+        DocumentReference addUser = db.collection("Usuarios").document(id);
+
+        db.collection("Usuarios")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Log.i("Sucesso", uri.toString());
-
-                                String uuid = FirebaseAuth.getInstance().getUid();
-
-                                //new User();
-                            }
-                        });
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("Falha", e.getMessage());
-                        e.printStackTrace();
+                        Log.w("Error", "Error adding document", e);
                     }
                 });
     }

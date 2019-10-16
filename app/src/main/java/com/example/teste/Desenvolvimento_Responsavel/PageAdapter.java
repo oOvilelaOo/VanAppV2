@@ -4,9 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.teste.Desenvolvimento_Responsavel.ChatFragment;
-import com.example.teste.Desenvolvimento_Responsavel.MapaFragment;
-import com.example.teste.Desenvolvimento_Responsavel.TransportadorFragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PageAdapter extends FragmentPagerAdapter {

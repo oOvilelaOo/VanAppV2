@@ -1,10 +1,15 @@
 package com.example.teste.VOs;
 
-public class ModeloVO {
+import java.io.Serializable;
+
+public class ModeloVO implements Serializable {
 
     private String cod;
     private String codMarca;
     private String modelo;
+
+    public ModeloVO() {
+    }
 
     public ModeloVO(String cod, String codMarca, String modelo) {
         this.cod = cod;
